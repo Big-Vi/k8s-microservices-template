@@ -3,10 +3,9 @@ kind: Service
 metadata:
   name: store-node-port-service
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 31600
   selector:
     component: store
