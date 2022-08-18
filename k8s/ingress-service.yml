@@ -8,7 +8,8 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
-    - http:
+    - host: <load-balancer-ip-from-nginx-aws>
+      http:
         paths:
           - path: /?(.*)
             pathType: Prefix

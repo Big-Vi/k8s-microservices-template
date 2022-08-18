@@ -3,6 +3,7 @@
 docker build -t <hub-user>/<repo-name>:<tag>
 docker tag <existing-image> <hub-user>/<repo-name>:<tag>
 docker push <hub-user>/<repo-name>:<tag>
+
 ```
 
 # Kubernetes
@@ -20,6 +21,9 @@ docker push <hub-user>/<repo-name>:<tag>
     kubectl logs <pod-name>
     kubectl config get-contexts
     kubectl config use-contexts <context-name>
+
+    kubectl set image deployment/<deployment-name> <container-name>=<image-name>
+
     ```
 
 ## Secret imperative command
@@ -28,6 +32,7 @@ docker push <hub-user>/<repo-name>:<tag>
     kubectl get secrets
     kubectl get secrets -o yaml
     echo <secret> | base64 -d
+
     ```
 
 # AWS EKS
@@ -37,9 +42,11 @@ docker push <hub-user>/<repo-name>:<tag>
     brew tap weaveworks/tap
     brew install weaveworks/tap/eksctl
     eksctl version
+
     ```
 
 ## Creat cluster using eksctl 
     ```
     eksctl create cluster --node-type t2.medium
+
     ```
