@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: rabbitmq
+metadata: 
+  name: store-frontend
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      component: rabbitmq
+      component: store-frontend
   template:
     metadata:
       labels:
-        component: rabbitmq
+        component: store-frontend
     spec:
       containers:
-        - name: rabbitmq
-          image: rabbitmq
+        - name: store
+          image: 147379/k8s-micro-store-frontend
           ports:
-            - containerPort: 5672
+            - containerPort: 80
           resources:
             requests:
               memory: "64Mi"

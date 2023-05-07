@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-notifications
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: store-notifications
+  template:
+    metadata:
+      labels:
+        component: stroe-notifications
+    spec:
+      containers:
+        - name: store-notifications
+          image: 147379/k8s-micro-store-notifications
+          ports:
+            - containerPort: 5001
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-access-key-id
+                  key:  AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret-access-key
+                  key:  AWS_SECRET_ACCESS_KEY
+            - name: FROM_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: from-email
+                  key:  FROM_EMAIL
+          envFrom:
+            - configMapRef:
+                name: rabbitmq-configmap
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

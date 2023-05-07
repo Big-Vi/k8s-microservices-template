@@ -1,16 +1,3 @@
-# apiVersion: v1
-# kind: Pod
-# metadata: 
-#   name: mongodb
-#   labels:
-#     components: mongodb
-# spec:
-#   containers:
-#     - name: mongodb
-#       image: mongo
-#       ports:
-#         - containerPort: 27017
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -33,6 +20,13 @@ spec:
           volumeMounts:
             - name: mongodb-storage
               mountPath: /data/db
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
       volumes:
         - name: mongodb-storage
           persistentVolumeClaim:
