@@ -1,0 +1,9 @@
+apiVersion: atlas.mongodb.com/v1
+kind: AtlasProject
+metadata:
+  name: mongo-atlas-project
+spec:
+  name: "K8s Micro"
+  projectIpAccessList:
+    - ipAddress: "0.0.0.0/0"
+      comment: "Allowing access to database from everywhere (only for development!)"

@@ -45,7 +45,7 @@ app.put("/orders/:id", async (req, res) => {
   if (status === "DELIVERED") {
     try {
       const connection = await amqp.connect(
-        `amqp://${process.env.RABBITMQ_HOST}:${process.env.RABBITMQ_PORT}`
+        `amqp://${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}:${process.env.RABBITMQ_PORT}`
       );
       console.log({ connection });
       const channel = await connection.createChannel();

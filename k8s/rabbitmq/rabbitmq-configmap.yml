@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: rabbitmq-configmap
 data:
-  RABBITMQ_HOST: "rabbitmq-cluster-ip-service"
+  RABBITMQ_HOST: "rabbitmq-cluster"
   RABBITMQ_PORT: "5672"

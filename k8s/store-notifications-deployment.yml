@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        component: stroe-notifications
+        component: store-notifications
     spec:
       containers:
         - name: store-notifications
@@ -21,18 +21,28 @@ spec:
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                  name: aws-access-key-id
+                  name: store-notifications-secret
                   key:  AWS_ACCESS_KEY_ID
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: aws-secret-access-key
+                  name: store-notifications-secret
                   key:  AWS_SECRET_ACCESS_KEY
             - name: FROM_EMAIL
               valueFrom:
                 secretKeyRef:
-                  name: from-email
+                  name: store-notifications-secret
                   key:  FROM_EMAIL
+            - name: "RABBITMQ_USER"
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-cluster-default-user
+                  key: username
+            - name: "RABBITMQ_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-cluster-default-user
+                  key: password
           envFrom:
             - configMapRef:
                 name: rabbitmq-configmap

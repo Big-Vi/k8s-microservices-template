@@ -1,0 +1,14 @@
+apiVersion: atlas.mongodb.com/v1
+kind: AtlasDeployment
+metadata:
+  name: mongo-atlas-cluster
+spec:
+  projectRef:
+    name: mongo-atlas-project
+  deploymentSpec:
+    name: Cluster0
+    providerSettings:
+      providerName: TENANT
+      regionName: AP_SOUTHEAST_2
+      instanceSizeName: M0
+      backingProviderName: AWS

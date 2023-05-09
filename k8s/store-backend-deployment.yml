@@ -17,9 +17,22 @@ spec:
           image: 147379/k8s-micro-store-backend
           ports:
             - containerPort: 5002
-          env:
-            - name: MONGODB_HOST
-              value: "mongodb-cluster-ip-service"
+          env: 
+            - name: "MONGODB_HOST"
+              valueFrom:
+                secretKeyRef:
+                  name: k8s-micro-cluster0-mongok8s
+                  key: connectionStringStandardSrv
+            - name: "RABBITMQ_USER"
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-cluster-default-user
+                  key: username
+            - name: "RABBITMQ_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-cluster-default-user
+                  key: password
           envFrom:
             - configMapRef:
                 name: rabbitmq-configmap
