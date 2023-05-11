@@ -62,3 +62,5 @@ curl --location 'http://localhost/api/products' \
 }
 '
 ```
+
+Checkout the [eks](https://github.com/Big-Vi/k8s-microservices-template/tree/eks) branch for deploying this microservices into AWS EKS.
