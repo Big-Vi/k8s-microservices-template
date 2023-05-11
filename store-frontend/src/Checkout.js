@@ -37,7 +37,7 @@ export default function Checkout({ order }) {
   const placeOrder = async () => {
     if (address && email && order.length) {
       try {
-        await axios.post("http://localhost/api/orders", {
+        await axios.post("/api/orders", {
           order,
           email,
           address,

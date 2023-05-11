@@ -1,18 +1,24 @@
-# K8S microservices template
+# K8S microservices deploying to AWS EKS
 
 ## Architecture Diagram
 ![Screenshot](./k8s-micro-architecture.png)
 
-## Enable K8S for local development using Docker Desktop
+## AWS EKS
 
-Settings -> Kubernetes -> Enable Kubernetes -> Apply & Restart
+### Install eksctl
+    ```
+    brew tap weaveworks/tap
+    brew install weaveworks/tap/eksctl
+    eksctl version
 
-Make sure to switch to the right context.
+    ```
 
-```
-kubectl config get-contexts
-kubectl config use-context docker-desktop
-```
+### Create cluster using eksctl 
+`eksctl create cluster --node-type t2.medium`
+
+eksctl automatically switch the cluster context. But make sure you're in the right context.
+`kubectl config get-contexts`
+`kubectl config use-context <context-name>`
 
 ## MongoDB Atlas Operator
 ```
@@ -37,22 +43,20 @@ echo "username: $username"
 echo "password: $password"
 ```
 
-## Kill any process that listen on port 80
-```
-lsof -i :80
-kill -9 <pid>
-```
-
 ## K8S resources
+
+`kubectl apply -f ./k8s/ingress/ingress-aws.yml`
+
+Creating AWS ingress produces load balancer. `kubectl get all -n ingress-nginx`. Copy the LB URL and paste into `ingress-service.yml` host field.
+
 ```
 kubectl apply -f ./k8s
-kubectl apply -f ./k8s/ingress/ingress-docker-desktop.yml
 kubectl apply -f ./k8s/ingress/ingress-service.yml
 ```
 
 ## Create the product in MongoDB
 ```
-curl --location 'http://localhost/api/products' \
+curl --location '<load-balancer-url>/api/products' \
 --header 'Content-Type: application/json' \
 --data '{
     "name": "Hoodie",
@@ -62,3 +66,7 @@ curl --location 'http://localhost/api/products' \
 }
 '
 ```
+
+
+
+

@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM --platform=linux/amd64 node:18-alpine as builder
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx
+FROM --platform=linux/amd64 nginx
 
 EXPOSE 80
 
