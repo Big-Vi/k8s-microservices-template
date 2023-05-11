@@ -14,7 +14,7 @@
     ```
 
 ### Create cluster using eksctl 
-`eksctl create cluster --node-type t2.medium`
+`eksctl create cluster --node-type t2.xlarge`
 
 eksctl automatically switch the cluster context. But make sure you're in the right context.
 `kubectl config get-contexts`
@@ -67,6 +67,5 @@ curl --location '<load-balancer-url>/api/products' \
 '
 ```
 
-
-
-
+## To the cluster
+`eksctl delete cluster --name=<cluster-name>`
