@@ -67,5 +67,5 @@ curl --location '<load-balancer-url>/api/products' \
 '
 ```
 
-## To the cluster
+## To delete the cluster
 `eksctl delete cluster --name=<cluster-name>`
